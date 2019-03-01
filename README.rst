@@ -7,6 +7,7 @@ Abstract
 ********
 
 A "dummy" app that contains some prior FreeSurfer output and simply copies this to the output directory.
+Can selectively copy only the final text data outputs, or all internal generated images and surface meshes.
 
 Run
 ***
