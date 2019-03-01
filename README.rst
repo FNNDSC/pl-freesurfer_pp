@@ -6,7 +6,7 @@ pl-freesurfer_pp
 Abstract
 ********
 
-A "dummy" app containing the output of some prior FreeSurfer output which simply copies this to thput directory
+A "dummy" app that contains some prior FreeSurfer output and simply copies this to the output directory.
 
 Run
 ***
