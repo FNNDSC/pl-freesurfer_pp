@@ -9,6 +9,7 @@
 #
 
 import os
+import shutil
 
 # import the Chris app superclass
 from chrisapp.base import ChrisApp
@@ -16,7 +17,13 @@ from chrisapp.base import ChrisApp
 
 class Freesurfer_pp(ChrisApp):
     """
-    A "dummy" app containing the output of some prior FreeSurfer output which simply copies this to thput directory.
+    A "dummy" app containing the output of some prior FreeSurfer runs, organized in
+    
+            <YR>-yr/<MO>-mo/<DA>-da
+            
+    directory structure within the container. This app simply copies one of these
+    pre-processed output trees into the output folder of the plugin.
+    
     """
     AUTHORS         = 'FNNDSC (dev@babyMRI.org)'
     SELFPATH        = os.path.dirname(os.path.abspath(__file__))
@@ -53,7 +60,6 @@ class Freesurfer_pp(ChrisApp):
         """
         Define the code to be run by this plugin app.
         """
-
 
 
 # ENTRYPOINT
