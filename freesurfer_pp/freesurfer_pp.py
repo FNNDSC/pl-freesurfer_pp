@@ -10,6 +10,7 @@
 
 import os
 import shutil
+import pudb
 
 # import the Chris app superclass
 from chrisapp.base import ChrisApp
@@ -60,7 +61,8 @@ class Freesurfer_pp(ChrisApp):
         """
         Define the code to be run by this plugin app.
         """
-
+        pudb.set_trace()
+        shutil.copytree('../preprocessed/05-yr/02-mo/04-da/stats/', '%s/stats' % options.outputdir)
 
 # ENTRYPOINT
 if __name__ == "__main__":

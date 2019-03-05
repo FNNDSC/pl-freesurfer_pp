@@ -7,7 +7,7 @@
 #
 # For example if building a local version, you could do:
 #
-#   docker build -t local/pf-freesurfer_pp .
+#   docker build -t local/pl-freesurfer_pp .
 #
 # In the case of a proxy (located at 192.168.13.14:3128), do:
 #
@@ -27,12 +27,13 @@ FROM fnndsc/ubuntu-python3:latest
 MAINTAINER fnndsc "dev@babymri.org"
 
 ENV APPROOT="/usr/src/freesurfer_pp"  VERSION="0.1"
-COPY ["preprocessed", "${APPROOT}"]
+COPY ["preprocessed", "/usr/src/preprocessed"]
 COPY ["freesurfer_pp", "${APPROOT}"]
 COPY ["requirements.txt", "${APPROOT}"]
 
 WORKDIR $APPROOT
 
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 CMD ["freesurfer_pp.py", "--help"]
