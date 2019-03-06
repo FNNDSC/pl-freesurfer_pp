@@ -14,7 +14,7 @@ from    os.path     import abspath, basename, isdir
 import  shutil
 import  pudb
 import  sys
-
+import  time
 
 # import the Chris app superclass
 from chrisapp.base import ChrisApp
@@ -143,6 +143,10 @@ class Freesurfer_pp(ChrisApp):
             str_tree = Freesurfer_pp.dirTree_probe(options.treePrint, '')
             print(str_tree)
             sys.exit(0)
+
+        if len(options.processDelay):
+            print('Simulating a process delay of %s seconds...' % options.processDelay)
+            time.sleep(int(options.processDelay))
 
         str_ageDirDefault   = '05-yr/02-mo/04-da'
         if len(options.ageSpec):
