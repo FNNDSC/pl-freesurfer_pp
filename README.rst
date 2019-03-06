@@ -14,7 +14,13 @@ Using ``docker run``
 
 Assign an "input" directory to ``/incoming`` and an output directory to ``/outgoing``. Note that the "input" directory is effectively ignored by this plugin, but is required.
 
-To get a listing of the internal tree of already processed and available FreeSurfer choices:
+In the simplest sense, the plugin can be run with
+
+    docker run --rm -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing   \
+            fnndsc/pl-freesurfer_pp freesurfer_pp.py \
+            /incoming /outgoing
+
+which will copy the internal `stats` directory from a `05-yr/02-mo/04-da` subject to the output. Other choices are available. To get a listing of the internal tree of already processed and available FreeSurfer choices:
 
     docker run --rm -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing   \
             fnndsc/pl-freesurfer_pp freesurfer_pp.py \
