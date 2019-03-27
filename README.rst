@@ -1,10 +1,49 @@
 pl-freesurfer_pp
-=============
+================
+
+.. image:: https://badge.fury.io/py/freesurfer_pp.svg
+    :target: https://badge.fury.io/py/freesurfer_pp
+
+.. image:: https://travis-ci.org/FNNDSC/freesurfer_pp.svg?branch=master
+    :target: https://travis-ci.org/FNNDSC/freesurfer_pp
+
+.. image:: https://img.shields.io/badge/python-3.5%2B-blue.svg
+    :target: https://badge.fury.io/py/pl-freesurfer_pp
+
+.. contents:: Table of Contents
+
 
 Abstract
-********
+--------
 
-This container houses some previously generated FreeSurfer output files (essentially the `stats` directory of a typical FreeSurfer run) and simply copies a given `stats` directory from inside the container to the plugin output directory.
+``freesurfer_pp.py`` is a *dummy* FreeSurfer plugin that is prepopulated with the results of several FreeSurfer runs. For a given run, this script will copy, for a given internal target, the already created ``stats`` directory as well as two directories of png files -- one containing colored parcellations, and one with some 3D views.
+
+Synopsis
+--------
+
+.. code::
+
+    python z2labelmap.py                                            \
+        [-v <level>] [--verbosity <level>]                          \
+        [--random]                                                  \
+        [-p <f_posRange>] [--posRange <f_posRange>]                 \
+        [-n <f_negRange>] [--negRange <f_negRange>]                 \
+        [-P <'RGB'>] [--posColor <'RGB'>]                           \
+        [-N  <'RGB'> [--negColor <'RGB'>]                           \
+        [-s <f_scaleRange>] [--scaleRange <f_scaleRange>]           \
+        [-l <f_lowerFilter>] [--lowerFilter <f_lowerFilter>]        \
+        [-u <f_upperFilter>] [--upperFilter <f_upperFilter>]        \
+        [-z <zFile>] [--zFile <zFile>]                              \
+        [--version]                                                 \
+        [--man]                                                     \
+        [--meta]                                                    \
+        <inputDir>                                                  \
+        <outputDir> 
+
+Run
+----
+
+
 
 Run
 ***
