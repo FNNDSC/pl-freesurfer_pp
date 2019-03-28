@@ -1,5 +1,5 @@
 #
-# Dockerfile for pman repository.
+# Dockerfile for pl-freesurfer_pp repository.
 #
 # Build with
 #
