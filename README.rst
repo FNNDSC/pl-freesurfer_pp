@@ -16,7 +16,7 @@ pl-freesurfer_pp
 Abstract
 --------
 
-``freesurfer_pp.py`` is a *dummy* FreeSurfer plugin / container that is prepopulated with the results of several *a priori* FreeSurfer runs. For a given run, this script will copy elements of one of several prior runs to the output directory. 
+``freesurfer_pp.py`` is a *dummy* FreeSurfer plugin / container that is prepopulated with the results of several *a priori* FreeSurfer runs. For a given run, this script will simply copy elements of one of these prior runs to the output directory. 
 
 Synopsis
 --------
@@ -29,9 +29,9 @@ Synopsis
             [--man]                                                     \
             [--meta]                                                    \
             [--copySpec <copySpec>]                                     \
-            [--ageSpec <ageSpec>]                                       \   
-        <inputDir>                                                      \
-        <outputDir> 
+            [--ageSpec <ageSpec>]                                       \
+            <inputDir>                                                  \
+            <outputDir> 
 
 Run
 ----
@@ -41,7 +41,7 @@ This ``plugin`` can be run in two modes: natively as a python package or as a co
 Using PyPI
 ~~~~~~~~~~
 
-** You probably do not want to run the PyPI version unless you are a developer! Mostly likely you want the docker containerized run -- see the next section.**
+*You probably do not want to run the PyPI version unless you are a developer! Mostly likely you want the docker containerized run -- see the next section.*
 
 To run from PyPI, simply do a 
 
@@ -61,12 +61,13 @@ Using ``docker run``
 
 The real utility of this package is to run it containerized against bundled data that is packed into the container.
 
-Assign an "input" directory to ``/incoming`` and an output directory to ``/outgoing``. Note that the "input" directory is effectively ignored by this plugin, but is required. Make sure that the host ``$(pwd)/out`` directory is world writable!
+Assign an "input" directory to ``/incoming`` and an "output" directory to ``/outgoing``. Note that the "input" directory is effectively ignored by this plugin, but is required. Make sure that the host ``$(pwd)/out`` directory is world writable!
 
 In the simplest sense, the plugin can be run with
 
 .. code:: bash
 
+    mkdir in out && chmod 777 out
     docker run --rm -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing      \
             fnndsc/pl-freesurfer_pp freesurfer_pp.py                    \
             /incoming /outgoing
