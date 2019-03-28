@@ -105,8 +105,8 @@ class Freesurfer_pp(ChrisApp):
     CATEGORY                = 'FreeSurfer'
     TYPE                    = 'ds'
     DESCRIPTION             = 'A "dummy" app that contains some prior FreeSurfer output and simply copies this to the output directory.'
-    DOCUMENTATION           = 'http://wiki'
-    VERSION                 = '2.0.0'
+    DOCUMENTATION           = 'https://github.com/FNNDSC/pl-freesurfer_pp'
+    VERSION                 = '2.0.1'
     ICON                    = '' # url of an icon image
     LICENSE                 = 'Opensource (MIT)'
     MAX_NUMBER_OF_WORKERS   = 1  # Override with integer value
@@ -271,7 +271,7 @@ class Freesurfer_pp(ChrisApp):
             print('It seems the ageSpec dir does not seem valid. Reverting to default.')
             str_treeAgeSpec = '../preprocessed/%s' % str_ageDirDefault            
 
-        pudb.set_trace()
+        # pudb.set_trace()
         lstr_targetDir  = options.copySpec.split(',')
         for str_targetDir in lstr_targetDir:
             lstr_targetDirFull   = glob.glob("%s/*%s*" % (options.outputdir, str_targetDir))

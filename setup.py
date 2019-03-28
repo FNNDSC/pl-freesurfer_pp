@@ -15,7 +15,7 @@ def readme():
 
 setup(
       name             =   'freesurfer_pp',
-      version          =   '2.0.0',
+      version          =   '2.0.1',
       description      =   'A simple/dummy app that simulates a FreeSurfer run', 
       long_description =   readme(),
       author           =   'Rudolph Pienaar',

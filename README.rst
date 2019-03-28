@@ -72,7 +72,7 @@ In the simplest sense, the plugin can be run with
             fnndsc/pl-freesurfer_pp freesurfer_pp.py                    \
             /incoming /outgoing
 
-which will copy **only** the internal `stats` directory from a `10-yr/06-mo/01-da` subject to the output. By specifying a ``--copySpec stats,3D,sag,cor,tra`` several additional directories containing png image frames through parcellated sagittal, coronal, and transverse (axial) planes as well as multiple 3D images are also copied.
+which will copy **only** the internal `stats` directory from a ``10-yr/06-mo/01-da`` subject to the output. By specifying a ``--copySpec stats,3D,sag,cor,tra`` several additional directories containing png image frames through parcellated sagittal, coronal, and transverse (axial) planes as well as multiple 3D images are also copied.
 
 Examples
 --------
