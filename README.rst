@@ -16,69 +16,116 @@ pl-freesurfer_pp
 Abstract
 --------
 
-``freesurfer_pp.py`` is a *dummy* FreeSurfer plugin that is prepopulated with the results of several FreeSurfer runs. For a given run, this script will copy, for a given internal target, the already created ``stats`` directory as well as two directories of png files -- one containing colored parcellations, and one with some 3D views.
+``freesurfer_pp.py`` is a *dummy* FreeSurfer plugin / container that is prepopulated with the results of several *a priori* FreeSurfer runs. For a given run, this script will copy elements of one of several prior runs to the output directory. 
 
 Synopsis
 --------
 
 .. code::
 
-    python z2labelmap.py                                            \
-        [-v <level>] [--verbosity <level>]                          \
-        [--random]                                                  \
-        [-p <f_posRange>] [--posRange <f_posRange>]                 \
-        [-n <f_negRange>] [--negRange <f_negRange>]                 \
-        [-P <'RGB'>] [--posColor <'RGB'>]                           \
-        [-N  <'RGB'> [--negColor <'RGB'>]                           \
-        [-s <f_scaleRange>] [--scaleRange <f_scaleRange>]           \
-        [-l <f_lowerFilter>] [--lowerFilter <f_lowerFilter>]        \
-        [-u <f_upperFilter>] [--upperFilter <f_upperFilter>]        \
-        [-z <zFile>] [--zFile <zFile>]                              \
-        [--version]                                                 \
-        [--man]                                                     \
-        [--meta]                                                    \
-        <inputDir>                                                  \
+        python freesurfer_pp.py                                         \
+            [-v <level>] [--verbosity <level>]                          \
+            [--version]                                                 \
+            [--man]                                                     \
+            [--meta]                                                    \
+            [--copySpec <copySpec>]                                     \
+            [--ageSpec <ageSpec>]                                       \   
+        <inputDir>                                                      \
         <outputDir> 
 
 Run
 ----
 
+This ``plugin`` can be run in two modes: natively as a python package or as a containerized docker image. The PyPI mode is largely included for completeness sake and only useful if run against some pre-processed tree that exists in the filesystem. 
 
+Using PyPI
+~~~~~~~~~~
 
-Run
-***
+** You probably do not want to run the PyPI version unless you are a developer! Mostly likely you want the docker containerized run -- see the next section.**
+
+To run from PyPI, simply do a 
+
+.. code:: bash
+
+    pip install freesurfer_pp
+
+and run with
+
+.. code:: bash
+
+    freesurfer.py --man /tmp /tmp
+
 
 Using ``docker run``
-====================
+~~~~~~~~~~~~~~~~~~~~
 
-Assign an "input" directory to ``/incoming`` and an output directory to ``/outgoing``. Note that the "input" directory is effectively ignored by this plugin, but is required.
+The real utility of this package is to run it containerized against bundled data that is packed into the container.
+
+Assign an "input" directory to ``/incoming`` and an output directory to ``/outgoing``. Note that the "input" directory is effectively ignored by this plugin, but is required. Make sure that the host ``$(pwd)/out`` directory is world writable!
 
 In the simplest sense, the plugin can be run with
 
-    docker run --rm -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing   \
-            fnndsc/pl-freesurfer_pp freesurfer_pp.py \
+.. code:: bash
+
+    docker run --rm -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing      \
+            fnndsc/pl-freesurfer_pp freesurfer_pp.py                    \
             /incoming /outgoing
 
-which will copy the internal `stats` directory from a `05-yr/02-mo/04-da` subject to the output. Other choices are available. To get a listing of the internal tree of already processed and available FreeSurfer choices:
+which will copy **only** the internal `stats` directory from a `10-yr/06-mo/01-da` subject to the output. By specifying a ``--copySpec stats,3D,sag,cor,tra`` several additional directories containing png image frames through parcellated sagittal, coronal, and transverse (axial) planes as well as multiple 3D images are also copied.
 
-    docker run --rm -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing   \
-            fnndsc/pl-freesurfer_pp freesurfer_pp.py \
-            -T ../preprocessed \
+Examples
+--------
+
+Check available pre-processed runs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To get a listing of the internal tree of already processed and available FreeSurfer choices:
+
+.. code:: bash
+
+    docker run --rm -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing      \
+            fnndsc/pl-freesurfer_pp freesurfer_pp.py                    \
+            -T ../preprocessed                                          \
             /incoming /outgoing
 
-This will print a tree of the available choices of `preprocessed` data in a directory tree. Select one, say the `08-yr/07-mo/16-da` and specify that to copy:
+This will print a tree of the available choices of `preprocessed` data in a directory tree. 
 
-    docker run --rm -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing   \
-            fnndsc/pl-freesurfer_pp freesurfer_pp.py \
+Copy the default for a selected pre-processed run
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Select one run, say the `08-yr/07-mo/16-da` and specify that to copy:
+
+.. code:: bash
+
+    docker run --rm -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing      \
+            fnndsc/pl-freesurfer_pp freesurfer_pp.py                    \
             -a 08-07-16 \
             /incoming /outgoing
+
+Simulate a processing delay
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To simulate a processing delay, specify some time in seconds:
 
-    docker run --rm -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing   \
-            fnndsc/pl-freesurfer_pp freesurfer_pp.py \
-            -a 08-07-16 \
-            -P 20 \
+.. code:: bash
+
+    docker run --rm -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing      \
+            fnndsc/pl-freesurfer_pp freesurfer_pp.py                    \
+            -a 08-07-16                                                 \
+            -P 20                                                       \
             /incoming /outgoing
 
-Make sure that the host ``$(pwd)/out`` directory is world writable!
+Explicitly copy all the data including images from a pre-processed run
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To copy all the image directories from the ``10-yr/06-mo/01-da`` subject, 
+
+.. code:: bash
+
+    docker run --rm -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing      \
+            fnndsc/pl-freesurfer_pp freesurfer_pp.py                    \
+            -a 10-06-01                                                 \
+            -c stats,sag,cor,tra,3D                                     \
+            /incoming /outgoing            
+
+
