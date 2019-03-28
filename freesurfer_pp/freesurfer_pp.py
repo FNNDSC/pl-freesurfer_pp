@@ -21,6 +21,18 @@ import  glob
 # import the Chris app superclass
 from chrisapp.base import ChrisApp
 
+Gstr_title = """
+  __                                __                       
+ / _|                              / _|                      
+| |_ _ __ ___  ___  ___ _   _ _ __| |_ ___ _ __  _ __  _ __  
+|  _| '__/ _ \/ _ \/ __| | | | '__|  _/ _ \ '__|| '_ \| '_ \ 
+| | | | |  __/  __/\__ \ |_| | |  | ||  __/ |   | |_) | |_) |
+|_| |_|  \___|\___||___/\__,_|_|  |_| \___|_|   | .__/| .__/ 
+                                          ______| |   | |    
+                                         |______|_|   |_|    
+
+"""
+
 Gstr_synopsis = """
 
     NAME
@@ -106,7 +118,7 @@ class Freesurfer_pp(ChrisApp):
     TYPE                    = 'ds'
     DESCRIPTION             = 'A "dummy" app that contains some prior FreeSurfer output and simply copies this to the output directory.'
     DOCUMENTATION           = 'https://github.com/FNNDSC/pl-freesurfer_pp'
-    VERSION                 = '2.0.1'
+    VERSION                 = '2.0.2'
     ICON                    = '' # url of an icon image
     LICENSE                 = 'Opensource (MIT)'
     MAX_NUMBER_OF_WORKERS   = 1  # Override with integer value
@@ -254,6 +266,9 @@ class Freesurfer_pp(ChrisApp):
             str_tree = Freesurfer_pp.dirTree_probe(options.treePrint, '')
             print(str_tree)
             sys.exit(0)
+
+        print(Gstr_title)
+        print('Version: %s' % Freesurfer_pp.VERSION)
 
         if len(options.processDelay):
             print('Simulating a process delay of %s seconds...' % options.processDelay)
