@@ -15,7 +15,9 @@ def readme():
 
 setup(
       name             =   'freesurfer_pp',
-      version          =   '2.0.2',
+      # for best practices make this version the same as the VERSION class variable
+      # defined in your main plugin app class
+      version          =   '2.0.3',
       description      =   'A simple/dummy app that simulates a FreeSurfer run', 
       long_description =   readme(),
       author           =   'Rudolph Pienaar',

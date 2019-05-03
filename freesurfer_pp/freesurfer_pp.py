@@ -118,7 +118,7 @@ class Freesurfer_pp(ChrisApp):
     TYPE                    = 'ds'
     DESCRIPTION             = 'A "dummy" app that contains some prior FreeSurfer output and simply copies this to the output directory.'
     DOCUMENTATION           = 'https://github.com/FNNDSC/pl-freesurfer_pp'
-    VERSION                 = '2.0.2'
+    VERSION                 = '2.0.3'
     ICON                    = '' # url of an icon image
     LICENSE                 = 'Opensource (MIT)'
     MAX_NUMBER_OF_WORKERS   = 1  # Override with integer value

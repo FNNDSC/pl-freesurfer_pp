@@ -26,7 +26,7 @@
 FROM fnndsc/ubuntu-python3:latest
 MAINTAINER fnndsc "dev@babymri.org"
 
-ENV APPROOT="/usr/src/freesurfer_pp"  VERSION="0.1"
+ENV APPROOT="/usr/src/freesurfer_pp" 
 COPY ["preprocessed", "/usr/src/preprocessed"]
 COPY ["freesurfer_pp", "${APPROOT}"]
 COPY ["requirements.txt", "${APPROOT}"]
