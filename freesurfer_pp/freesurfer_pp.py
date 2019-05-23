@@ -118,7 +118,7 @@ class Freesurfer_pp(ChrisApp):
     TYPE                    = 'ds'
     DESCRIPTION             = 'A "dummy" app that contains some prior FreeSurfer output and simply copies this to the output directory.'
     DOCUMENTATION           = 'https://github.com/FNNDSC/pl-freesurfer_pp'
-    VERSION                 = '2.0.3'
+    VERSION                 = '2.0.6'
     ICON                    = '' # url of an icon image
     LICENSE                 = 'Opensource (MIT)'
     MAX_NUMBER_OF_WORKERS   = 1  # Override with integer value
@@ -136,22 +136,6 @@ class Freesurfer_pp(ChrisApp):
     OUTPUT_META_DICT        = {}
  
     str_tree                = ''
-
-    def manPage_show(self):
-        """
-        Print some quick help.
-        """
-        print(Gstr_synopsis)
-
-    def metaData_show(self):
-        """
-        Print the plugin meta data
-        """
-        l_metaData  = dir(self)
-        l_classVar  = [x for x in l_metaData if x.isupper() ]
-        for str_var in l_classVar:
-            str_val = getattr(self, str_var)
-            print("%20s: %s" % (str_var, str_val))
 
     @staticmethod
     def dirTree_probe(dir, padding, print_files=False):
@@ -248,18 +232,6 @@ class Freesurfer_pp(ChrisApp):
         """
         Define the code to be run by this plugin app.
         """
-
-        if options.b_man:
-            self.manPage_show()
-            sys.exit(0)
-
-        if options.b_meta:
-            self.metaData_show()
-            sys.exit(0)
-
-        if options.b_version:
-            print('Plugin Version: %s' % Freesurfer_pp.VERSION)
-            sys.exit(0)
 
         if len(options.treePrint):
             str_tree = ''

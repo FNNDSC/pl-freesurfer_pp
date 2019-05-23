@@ -57,5 +57,5 @@ if [[ "$#" -eq 2 ]]; then
     echo pushing $VER to PyPI ...
     rstcheck README.rst
     python3 setup.py sdist
-    twine upload dist/{{ cookiecutter.app_name }}-${VER}.tar.gz
+    twine upload dist/freesurfer_pp-${VER}.tar.gz
 fi
